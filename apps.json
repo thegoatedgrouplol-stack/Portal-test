@@ -1,1 +1,11 @@
-
+{
+  "apps": [
+    {
+      "name": "Sample App",
+      "version": "1.0",
+      "icon": "https://unsplash.com",
+      "ipa_url": "https://github.io",
+      "description": "A clean sideloadable app example."
+    }
+  ]
+}
