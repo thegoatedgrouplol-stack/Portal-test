@@ -4,62 +4,219 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Scarlet Web</title>
-    <!-- Compiled CSS Delivery Sheet to bypass script restrictions -->
-    <link href="https://jsdelivr.net" rel="stylesheet">
     <style>
         @import url('https://googleapis.com');
+        
+        /* Scarlet Custom Core Styling */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background: linear-gradient(180deg, #0e0204 0%, #070002 50%, #000000 100%);
+            color: #f3f4f6;
+            min-height: screen;
+            padding-bottom: 3rem;
         }
-        .scarlet-glow {
-            box-shadow: 0 0 15px rgba(255, 26, 64, 0.6);
+        
+        /* Header Elements */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: #0e0204;
+            border-b: 1px solid rgba(255, 26, 64, 0.2);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .btn-glow {
-            box-shadow: 0 4px 14px rgba(255, 26, 64, 0.3);
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .scarlet-dot {
+            width: 0.75rem;
+            height: 0.75rem;
+            background-color: #ff1a40;
+            border-radius: 9999px;
+            box-shadow: 0 0 15px rgba(255, 26, 64, 0.8);
+        }
+        .brand-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #ffffff;
+        }
+        .brand-accent { color: #ff1a40; }
+        
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            background-color: rgba(255, 26, 64, 0.1);
+            border: 1px solid rgba(255, 26, 64, 0.3);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+        }
+        .status-dot {
+            width: 0.375rem;
+            height: 0.375rem;
+            background-color: #34d399;
+            border-radius: 9999px;
+        }
+        .status-text {
+            font-size: 11px;
+            font-weight: 700;
+            color: #34d399;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Layout Main Elements */
+        main {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 2rem 1.25rem;
+        }
+        .hero-title {
+            font-size: 1.875rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.025em;
+        }
+        .hero-subtitle {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            font-weight: 500;
+            margin-bottom: 2rem;
+        }
+
+        /* App Grid Cards */
+        .app-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
         .glass-card {
             background-color: rgba(20, 6, 9, 0.7);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 26, 64, 0.15);
+            border-radius: 1rem;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: border-color 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: rgba(255, 26, 64, 0.4);
+        }
+        
+        .app-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .app-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 1rem;
+            object-fit: cover;
+            border: 1px solid rgba(255, 25, 64, 0.2);
+        }
+        .app-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.25;
+        }
+        .version-tag {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            color: #ff1a40;
+            background-color: rgba(255, 26, 64, 0.1);
+            border: 1px solid rgba(255, 26, 64, 0.2);
+            padding: 0.125rem 0.375rem;
+            border-radius: 4px;
+            margin-top: 0.25rem;
+        }
+        .app-desc {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            margin-top: 0.25rem;
+            font-weight: 500;
+            max-width: 220px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Action Buttons */
+        .get-btn {
+            background-color: #ff1a40;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.625rem 1.25rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            box-shadow: 0 4px 14px rgba(255, 26, 64, 0.3);
+            transition: transform 0.15s ease;
+        }
+        .get-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Spinner elements */
+        .spinner {
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid transparent;
+            border-top-color: #ff1a40;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin: 2rem auto;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
-<body class="text-gray-100 min-h-screen pb-12">
+<body>
 
-    <!-- Scarlet Glowing Header -->
-    <header class="sticky top-0 z-50 bg-[#0e0204] border-b border-[#ff1a40]/20 px-6 py-4 flex justify-between items-center">
-        <div class="flex items-center space-x-2">
-            
-            <span class="w-3 h-3 rounded-full bg-[#ff1a40] scarlet-glow"></span>
-            <h1 class="text-xl font-extrabold uppercase tracking-wider text-white">Scarlet<span class="text-[#ff1a40]">.</span></h1>
+    <!-- Scarlet Header layout -->
+    <header>
+        <div class="brand-container">
+            <span class="scarlet-dot"></span>
+            <h1 class="brand-title">Scarlet<span class="brand-accent">.</span></h1>
         </div>
-        <div class="flex items-center space-x-2 bg-[#ff1a40]/10 border border-[#ff1a40]/30 px-3 py-1 rounded-full">
-            <span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>
-            <span class="text-[11px] font-bold text-green-400 uppercase tracking-wider">Signed</span>
+        <div class="status-badge">
+            <span class="status-dot"></span>
+            <span class="status-text">Signed</span>
         </div>
     </header>
 
-    <!-- Main Content Container -->
-    <main class="max-w-xl mx-auto px-5 pt-8">
-        
-        <!-- Hero Branding Accent -->
-        <div class="mb-8 text-center sm:text-left">
-            <h2 class="text-3xl font-extrabold text-white tracking-tight mb-1">Native Sideloading</h2>
-            <p class="text-xs text-gray-400 tracking-wide font-medium">Select an application below to begin installation.</p>
-        </div>
+    <!-- Main Entry Context -->
+    <main>
+        <h2 class="hero-title">Native Sideloading</h2>
+        <p class="hero-subtitle">Select an application below to begin installation.</p>
 
-        <!-- Scarlet App Library Grid -->
-        <div id="app-grid" class="space-y-4">
-            <!-- Loading Placeholder State -->
-            <div class="glass-card rounded-2xl p-5 flex items-center justify-center">
-                <div class="w-5 h-5 border-2 border-t-transparent border-[#ff1a40] rounded-full animate-spin"></div>
-            </div>
+        <!-- Dynamic Grid Engine Container -->
+        <div id="app-grid" class="app-grid">
+            <div class="spinner"></div>
         </div>
     </main>
 
-    <!-- JavaScript Data Engine -->
     <script>
         async function loadScarletApps() {
             try {
@@ -70,35 +227,27 @@
 
                 data.apps.forEach(app => {
                     const card = document.createElement('div');
-                    card.className = "glass-card rounded-2xl p-4 flex items-center justify-between hover:border-[#ff1a40]/40 transition-all duration-300";
+                    card.className = "glass-card";
                     card.innerHTML = `
-                        <div class="flex items-center space-x-4">
-                            <!-- App Icon Frame -->
-                            <div class="relative flex-shrink-0">
-                                <img src="${app.icon}" class="w-14 h-14 rounded-2xl object-cover border border-white/10" alt="${app.name}">
-                            </div>
-                            <!-- App Details -->
+                        <div class="app-info">
+                            <img src="${app.icon}" class="app-icon" alt="${app.name}">
                             <div>
-                                <h3 class="font-bold text-white text-[15px] tracking-tight leading-snug">${app.name}</h3>
-                                <div class="flex items-center mt-0.5">
-                                    <span class="text-[10px] font-bold text-[#ff1a40] bg-[#ff1a40]/10 px-1.5 py-0.5 rounded border border-[#ff1a40]/20">v${app.version}</span>
-                                </div>
-                                <p class="text-xs text-gray-400 mt-1 font-medium max-w-[180px] sm:max-w-[260px] truncate">${app.description}</p>
+                                <h3 class="app-name">${app.name}</h3>
+                                <span class="version-tag">v${app.version}</span>
+                                <p class="app-desc">${app.description}</p>
                             </div>
                         </div>
-                        <!-- Scarlet Red Action Button -->
-                        <a href="itms-services://?action=download-manifest&url=${app.ipa_url}" 
-                           class="bg-[#ff1a40] text-white font-bold text-xs uppercase tracking-widest px-5 py-2.5 rounded-full btn-glow transform active:scale-95 transition duration-150 flex-shrink-0">
+                        <a href="itms-services://?action=download-manifest&url=${app.ipa_url}" class="get-btn">
                             Get
                         </a>
                     `;
                     grid.appendChild(card);
                 });
             } catch (error) {
-                console.error('UI rendering exception:', error);
+                console.error('Rendering pipeline crash:', error);
                 document.getElementById('app-grid').innerHTML = `
-                    <div class="border border-red-500/20 bg-red-500/5 rounded-2xl p-4 text-center">
-                        <p class="text-red-400 text-xs font-semibold uppercase tracking-wider">Failed to parse Scarlet data source.</p>
+                    <div style="border: 1px solid rgba(239, 68, 68, 0.2); background-color: rgba(239, 68, 68, 0.05); border-radius: 1rem; padding: 1rem; text-align: center;">
+                        <p style="color: #f87171; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Failed to parse apps.json data source.</p>
                     </div>
                 `;
             }
