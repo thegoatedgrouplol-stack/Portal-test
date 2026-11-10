@@ -2,8 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Violet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <!-- iOS Web App Full-Screen Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Violet">
+    <title>Violet Signer</title>
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         
@@ -12,28 +17,29 @@
             margin: 0;
             padding: 0;
             -webkit-tap-highlight-color: transparent;
+            user-select: none;
         }
         
-        body { 
+        html, body { 
+            width: 100%;
+            height: 100%;
+            height: 100dvh;
+            overflow: hidden;
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: #000000;
+            background: #040208;
             color: #f3f4f6;
-            min-height: 100vh;
-            padding-bottom: 5rem;
-            overflow-x: hidden;
-            position: relative;
         }
 
         /* Ambient Glow Layer */
         body::before {
             content: '';
             position: fixed;
-            top: -15%;
+            top: -10%;
             left: 50%;
             transform: translateX(-50%);
-            width: 120vw;
-            height: 65vh;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.18) 0%, rgba(244, 63, 94, 0.05) 40%, rgba(20, 6, 38, 0) 70%);
+            width: 140vw;
+            height: 70vh;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.22) 0%, rgba(168, 85, 247, 0.08) 40%, rgba(4, 2, 8, 0) 70%);
             z-index: 0;
             pointer-events: none;
             animation: ambientGlow 8s ease-in-out infinite alternate;
@@ -44,22 +50,25 @@
             100% { opacity: 1; transform: translateX(-50%) scale(1.05); }
         }
 
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #000000; }
-        ::-webkit-scrollbar-thumb { background: rgba(168, 85, 247, 0.2); border-radius: 9999px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(168, 85, 247, 0.4); }
+        /* App Viewport Container */
+        .app-viewport {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            height: 100dvh;
+            position: relative;
+            z-index: 10;
+        }
 
         /* Navigation Header */
         header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background-color: rgba(9, 2, 18, 0.85);
+            flex-shrink: 0;
+            background-color: rgba(9, 3, 20, 0.85);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border-bottom: 1px solid rgba(168, 85, 247, 0.15);
-            padding: 0.9rem 1.5rem;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+            padding: calc(env(safe-area-inset-top) + 0.8rem) 1.5rem 0.8rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -72,17 +81,17 @@
         }
 
         .violet-dot {
-            width: 0.6rem;
-            height: 0.6rem;
-            background: linear-gradient(135deg, #a855f7 0%, #f43f5e 100%);
+            width: 0.65rem;
+            height: 0.65rem;
+            background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
             border-radius: 9999px;
-            box-shadow: 0 0 14px rgba(168, 85, 247, 0.6), 0 0 28px rgba(244, 63, 94, 0.4);
+            box-shadow: 0 0 14px rgba(168, 85, 247, 0.7);
             animation: dotPulse 2s infinite alternate;
         }
 
         @keyframes dotPulse {
             0% { transform: scale(0.9); opacity: 0.8; }
-            100% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1.15); opacity: 1; }
         }
 
         .brand-title {
@@ -97,7 +106,7 @@
         .status-badge {
             display: flex;
             align-items: center;
-            gap: 0.35rem;
+            gap: 0.4rem;
             background-color: rgba(52, 211, 153, 0.08);
             border: 1px solid rgba(52, 211, 153, 0.25);
             padding: 0.3rem 0.85rem;
@@ -132,148 +141,174 @@
             letter-spacing: 0.06em;
         }
 
-        /* Main Container */
+        /* Main Scrollable Canvas */
         main {
-            position: relative;
-            z-index: 10;
-            max-width: 480px;
+            flex: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 1.5rem 1.15rem calc(env(safe-area-inset-bottom) + 3rem) 1.15rem;
+            max-width: 520px;
             margin: 0 auto;
-            padding: 1.75rem 1.15rem;
+            width: 100%;
         }
+
+        main::-webkit-scrollbar { width: 4px; }
+        main::-webkit-scrollbar-track { background: transparent; }
+        main::-webkit-scrollbar-thumb { background: rgba(139, 92, 246, 0.2); border-radius: 9999px; }
 
         .hero-section {
             text-align: center;
-            margin-bottom: 1.75rem;
+            margin-bottom: 1.5rem;
         }
 
         .hero-title {
-            font-size: 2.2rem;
+            font-size: 2.1rem;
             font-weight: 800;
             color: #ffffff;
             letter-spacing: -0.02em;
-            margin-bottom: 0.35rem;
+            margin-bottom: 0.3rem;
             background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .hero-subtitle {
-            font-size: 0.825rem;
+            font-size: 0.8rem;
             color: #94a3b8;
             font-weight: 500;
             line-height: 1.45;
         }
 
-        /* Quick Action Repo Import Card */
-        .repo-card {
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.12) 0%, rgba(13, 4, 26, 0.4) 100%);
-            border: 1px solid rgba(168, 85, 247, 0.25);
-            border-radius: 1.25rem;
-            padding: 1rem 1.25rem;
+        /* Violet Signer Console Box */
+        .signer-box {
+            background: linear-gradient(145deg, rgba(23, 10, 43, 0.6) 0%, rgba(10, 3, 24, 0.4) 100%);
+            border: 1px solid rgba(139, 92, 246, 0.22);
+            border-radius: 1.35rem;
+            padding: 1.25rem;
             margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
         }
-        .repo-info { flex: 1; }
-        .repo-title { font-size: 13px; font-weight: 800; color: #ffffff; text-transform: uppercase; letter-spacing: 0.04em; }
-        .repo-sub { font-size: 11px; color: #94a3b8; margin-top: 2px; }
-        .repo-btn {
-            background: rgba(168, 85, 247, 0.15);
-            border: 1px solid rgba(168, 85, 247, 0.35);
+
+        .signer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .signer-title {
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             color: #c084fc;
-            padding: 0.45rem 0.95rem;
-            border-radius: 9999px;
+        }
+        .cert-select {
+            background: rgba(139, 92, 246, 0.12);
+            border: 1px solid rgba(139, 92, 246, 0.25);
+            color: #e9d5ff;
             font-size: 11px;
             font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-        }
-        .repo-btn:hover {
-            background: rgba(168, 85, 247, 0.3);
-            color: #ffffff;
+            padding: 0.3rem 0.6rem;
+            border-radius: 0.6rem;
+            outline: none;
         }
 
-        /* Showcase Carousel */
-        .showcase-carousel {
-            display: flex;
-            gap: 0.75rem;
-            overflow-x: auto;
-            padding-bottom: 1rem;
-            margin-bottom: 1.5rem;
-            scrollbar-width: none;
-        }
-        .showcase-carousel::-webkit-scrollbar { display: none; }
-
-        .carousel-card {
-            flex: 0 0 78%;
-            background: linear-gradient(145deg, rgba(28, 11, 52, 0.45) 0%, rgba(13, 4, 26, 0.25) 100%);
-            border: 1px solid rgba(168, 85, 247, 0.18);
-            border-radius: 1.25rem;
-            padding: 1.1rem;
-            transition: border-color 0.3s ease;
-        }
-        .carousel-card:hover { border-color: rgba(168, 85, 247, 0.35); }
-        .carousel-title { font-size: 12px; font-weight: 800; text-transform: uppercase; color: #a855f7; letter-spacing: 0.05em; }
-        .carousel-body { font-size: 14px; font-weight: 700; color: #ffffff; margin-top: 0.25rem; }
-        .carousel-desc { font-size: 11px; color: #94a3b8; margin-top: 0.2rem; font-weight: 500; }
-
-        /* Stats Row */
-        .stats-row {
-            display: grid;
-            grid-template-cols: repeat(3, 1fr);
-            gap: 0.65rem;
-            margin-bottom: 1.5rem;
-        }
-        .stat-card {
-            background: linear-gradient(135deg, rgba(22, 8, 44, 0.35) 0%, rgba(11, 3, 24, 0.2) 100%);
-            border: 1px solid rgba(168, 85, 247, 0.1);
-            border-radius: 0.95rem;
-            padding: 0.75rem 0.5rem;
+        .dropzone {
+            border: 2px dashed rgba(139, 92, 246, 0.3);
+            border-radius: 1rem;
+            padding: 1.5rem 1rem;
             text-align: center;
+            background: rgba(15, 5, 31, 0.35);
+            cursor: pointer;
             transition: all 0.3s ease;
         }
-        .stat-card:hover { border-color: rgba(168, 85, 247, 0.25); transform: translateY(-1px); }
-        .stat-val { font-size: 1.15rem; font-weight: 800; color: #ffffff; }
-        .stat-lbl { font-size: 8px; text-transform: uppercase; letter-spacing: 0.06em; color: #a855f7; font-weight: 700; margin-top: 0.2rem; }
-
-        /* Category Filter Chips & Search */
-        .search-container {
-            margin-bottom: 1.25rem;
+        .dropzone:hover {
+            border-color: rgba(168, 85, 247, 0.6);
+            background: rgba(26, 9, 52, 0.45);
         }
+        .drop-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.4rem;
+        }
+        .drop-title { font-size: 13px; font-weight: 700; color: #ffffff; }
+        .drop-sub { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+
+        .signer-controls {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+        }
+
+        .input-field {
+            width: 100%;
+            background: rgba(9, 3, 20, 0.6);
+            border: 1px solid rgba(139, 92, 246, 0.16);
+            padding: 0.65rem 0.95rem;
+            border-radius: 0.85rem;
+            color: #ffffff;
+            font-size: 12px;
+            outline: none;
+        }
+        .input-field:focus { border-color: rgba(168, 85, 247, 0.5); }
+
+        .sign-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+            border: none;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0.75rem;
+            border-radius: 0.85rem;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(139, 92, 246, 0.35);
+            transition: all 0.2s ease;
+        }
+        .sign-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5); }
+
+        .progress-bar-wrap {
+            display: none;
+            margin-top: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 9999px;
+            height: 6px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #8b5cf6, #ec4899);
+            transition: width 0.3s linear;
+        }
+
+        /* App Store Grid Section */
+        .search-container { margin-bottom: 1.25rem; }
         .search-input {
             width: 100%;
             background-color: rgba(16, 5, 29, 0.55);
-            border: 1px solid rgba(168, 85, 247, 0.16);
+            border: 1px solid rgba(139, 92, 246, 0.16);
             padding: 0.85rem 1.25rem;
             border-radius: 1.1rem;
             color: #ffffff;
-            font-family: inherit;
             font-size: 0.875rem;
             outline: none;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-        .search-input:focus {
-            border-color: rgba(168, 85, 247, 0.5);
-            background-color: rgba(23, 7, 43, 0.7);
-            box-shadow: 0 0 18px rgba(168, 85, 247, 0.2);
         }
 
         .filter-bar {
             display: flex;
             gap: 0.5rem;
             overflow-x: auto;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
             padding-bottom: 0.25rem;
             scrollbar-width: none;
         }
         .filter-bar::-webkit-scrollbar { display: none; }
         .chip {
             background: rgba(16, 5, 29, 0.4);
-            border: 1px solid rgba(168, 85, 247, 0.12);
+            border: 1px solid rgba(139, 92, 246, 0.12);
             color: #94a3b8;
             padding: 0.4rem 0.95rem;
             border-radius: 9999px;
@@ -281,15 +316,13 @@
             font-weight: 700;
             cursor: pointer;
             white-space: nowrap;
-            transition: all 0.2s ease;
         }
         .chip.active, .chip:hover {
-            background: rgba(168, 85, 247, 0.2);
-            border-color: rgba(168, 85, 247, 0.4);
+            background: rgba(139, 92, 246, 0.2);
+            border-color: rgba(139, 92, 246, 0.4);
             color: #ffffff;
         }
 
-        /* App Grid */
         .app-grid {
             display: flex;
             flex-direction: column;
@@ -300,22 +333,14 @@
             background-color: rgba(16, 5, 28, 0.5);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(168, 85, 247, 0.14);
+            border: 1px solid rgba(139, 92, 246, 0.14);
             border-radius: 1.25rem;
             padding: 0.85rem 1.1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.3s ease;
         }
 
-        .glass-card:hover {
-            border-color: rgba(168, 85, 247, 0.35);
-            transform: translateY(-2px);
-            background-color: rgba(24, 8, 43, 0.65);
-            box-shadow: 0 8px 24px rgba(168, 85, 247, 0.1);
-        }
-        
         .app-info {
             display: flex;
             align-items: center;
@@ -329,19 +354,14 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
         
-        .app-name {
-            font-size: 14.5px;
-            font-weight: 700;
-            color: #ffffff;
-            line-height: 1.2;
-        }
+        .app-name { font-size: 14.5px; font-weight: 700; color: #ffffff; line-height: 1.2; }
         .version-tag {
             display: inline-block;
             font-size: 9px;
             font-weight: 700;
             color: #c084fc;
-            background-color: rgba(168, 85, 247, 0.08);
-            border: 1px solid rgba(168, 85, 247, 0.2);
+            background-color: rgba(139, 92, 246, 0.08);
+            border: 1px solid rgba(139, 92, 246, 0.2);
             padding: 0.1rem 0.4rem;
             border-radius: 4px;
             margin-top: 0.2rem;
@@ -350,7 +370,6 @@
             font-size: 0.75rem;
             color: #94a3b8;
             margin-top: 0.3rem;
-            font-weight: 500;
             max-width: 170px;
             white-space: nowrap;
             overflow: hidden;
@@ -372,12 +391,10 @@
             padding: 0.5rem 0.65rem;
             border-radius: 0.6rem;
             text-decoration: none;
-            transition: all 0.2s ease;
         }
-        .ipa-btn:hover { background: rgba(255, 255, 255, 0.12); color: #ffffff; }
 
         .get-btn {
-            background: linear-gradient(135deg, #a855f7 0%, #f43f5e 100%);
+            background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
             color: #ffffff;
             font-weight: 800;
             font-size: 0.725rem;
@@ -386,234 +403,131 @@
             padding: 0.55rem 1.25rem;
             border-radius: 9999px;
             text-decoration: none;
-            box-shadow: 0 4px 14px rgba(168, 85, 247, 0.35);
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35);
             cursor: pointer;
         }
-        .get-btn:hover {
-            transform: translateY(-1px) scale(1.03);
-            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.5);
-        }
-
-        /* Help Walkthrough */
-        .help-section {
-            margin-top: 3.5rem;
-            border-top: 1px solid rgba(168, 85, 247, 0.1);
-            padding-top: 1.75rem;
-        }
-        .help-heading {
-            font-size: 0.875rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        .guide-box {
-            background-color: rgba(14, 5, 26, 0.3);
-            border: 1px solid rgba(168, 85, 247, 0.08);
-            border-radius: 1rem;
-            padding: 1.15rem;
-        }
-        .guide-step {
-            font-size: 0.775rem;
-            color: #94a3b8;
-            line-height: 1.55;
-            margin-bottom: 0.6rem;
-        }
-        .guide-step:last-child { margin-bottom: 0; }
-        .guide-accent { color: #c084fc; font-weight: 600; }
-
-        .spinner {
-            width: 1.25rem;
-            height: 1.25rem;
-            border: 2px solid transparent;
-            border-top-color: #a855f7;
-            border-radius: 50%;
-            animation: spin 0.6s linear infinite;
-            margin: 2.5rem auto;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-    <!-- Header Bar -->
-    <header>
-        <div class="brand-container">
-            <span class="violet-dot"></span>
-            <h1 class="brand-title">Violet<span class="brand-accent">.</span></h1>
-        </div>
-        <div class="status-badge">
-            <span class="status-dot"></span>
-            <span class="status-text">Signed</span>
-        </div>
-    </header>
-
-    <!-- Main Workspace -->
-    <main>
-        
-        <section class="hero-section">
-            <h2 class="hero-title">Cosmic Sideload</h2>
-            <p class="hero-subtitle">Experience a pure 1-to-1 advanced distribution interface layer. Fully optimized for instant deployments.</p>
-        </section>
-
-        <!-- Repo Copy Banner -->
-        <div class="repo-card">
-            <div class="repo-info">
-                <div class="repo-title">Scarlet Repository</div>
-                <div class="repo-sub">Import directly into sideloading apps</div>
+    <div class="app-viewport">
+        <!-- Navigation Header -->
+        <header>
+            <div class="brand-container">
+                <span class="violet-dot"></span>
+                <h1 class="brand-title">Violet<span class="brand-accent">.</span></h1>
             </div>
-            <button class="repo-btn" onclick="copyRepoUrl()">Copy Link</button>
-        </div>
-
-        <!-- Showcase Carousel -->
-        <section class="showcase-carousel">
-            <div class="carousel-card">
-                <div class="carousel-title">No Revokes</div>
-                <div class="carousel-body">Direct Web Installs</div>
-                <div class="carousel-desc">Bypass localized system blocks with secure plist configurations.</div>
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                <span class="status-text">Signed</span>
             </div>
-            <div class="carousel-card">
-                <div class="carousel-title">Advanced GUI</div>
-                <div class="carousel-body">Dynamic Gradient Tracks</div>
-                <div class="carousel-desc">Experience fluid active states and high-performance layout sheets.</div>
-            </div>
-        </section>
+        </header>
 
-        <!-- Stats Row -->
-        <section class="stats-row">
-            <div class="stat-card">
-                <div id="stat-apps" class="stat-val">0</div>
-                <div class="stat-lbl">Apps Live</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-val">v1.3</div>
-                <div class="stat-lbl">Engine Build</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-val">Online</div>
-                <div class="stat-lbl">Server Link</div>
-            </div>
-        </section>
+        <!-- Main Workspace -->
+        <main>
+            <section class="hero-section">
+                <h2 class="hero-title">Violet Signer</h2>
+                <p class="hero-subtitle">Standalone iOS application signing & direct web deployment portal.</p>
+            </section>
 
-        <!-- Search Bar -->
-        <div class="search-container">
-            <input type="text" id="search-bar" class="search-input" placeholder="Search application library..." onkeyup="filterApps()">
-        </div>
+            <!-- Signer Drag & Drop Tool -->
+            <section class="signer-box">
+                <div class="signer-header">
+                    <span class="signer-title">IPA Signer Console</span>
+                    <select class="cert-select">
+                        <option>Enterprise Profile #1</option>
+                        <option>Developer Cert #2</option>
+                    </select>
+                </div>
 
-        <!-- Category Chips -->
-        <div class="filter-bar">
-            <button class="chip active" onclick="selectCategory('all', this)">All Apps</button>
-            <button class="chip" onclick="selectCategory('tweaks', this)">Tweaks</button>
-            <button class="chip" onclick="selectCategory('emulators', this)">Emulators</button>
-            <button class="chip" onclick="selectCategory('games', this)">Games</button>
-        </div>
+                <div class="dropzone" onclick="document.getElementById('file-input').click()">
+                    <div class="drop-icon">📦</div>
+                    <div class="drop-title" id="file-name">Tap or Drop .IPA File</div>
+                    <div class="drop-sub">Supports iOS 14.0 - 18.x packages</div>
+                    <input type="file" id="file-input" accept=".ipa" style="display: none" onchange="handleFile(this)">
+                </div>
 
-        <!-- App Grid -->
-        <div id="app-grid" class="app-grid">
-            <div class="spinner"></div>
-        </div>
+                <div class="signer-controls">
+                    <input type="text" class="input-field" placeholder="Custom Bundle ID (e.g. com.violet.app)">
+                    <button class="sign-btn" onclick="startSigning()">Sign Package</button>
+                    <div class="progress-bar-wrap" id="progress-wrap">
+                        <div class="progress-bar-fill" id="progress-fill"></div>
+                    </div>
+                </div>
+            </section>
 
-        <!-- Walkthrough -->
-        <section class="help-section">
-            <h3 class="help-heading">Configuration Walkthrough</h3>
-            <div class="guide-box">
-                <p class="guide-step">1. Press <span class="guide-accent">GET</span> to activate over-the-air installation scripts instantly via your browser.</p>
-                <p class="guide-step">2. If an enterprise warning displays, go to Settings → General → <span class="guide-accent">VPN & Device Management</span>.</p>
-                <p class="guide-step">3. Locate the profile corresponding to your assigned developer asset and choose <span class="guide-accent">Trust</span>.</p>
+            <!-- Search & Filters -->
+            <div class="search-container">
+                <input type="text" id="search-bar" class="search-input" placeholder="Search signed apps..." onkeyup="filterApps()">
             </div>
-        </section>
-    </main>
+
+            <div class="filter-bar">
+                <button class="chip active" onclick="selectCategory('all', this)">All Apps</button>
+                <button class="chip" onclick="selectCategory('tweaks', this)">Tweaks</button>
+                <button class="chip" onclick="selectCategory('emulators', this)">Emulators</button>
+                <button class="chip" onclick="selectCategory('games', this)">Games</button>
+            </div>
+
+            <!-- Apps Container -->
+            <div id="app-grid" class="app-grid">
+                <!-- App items render dynamically -->
+            </div>
+        </main>
+    </div>
 
     <script>
-        let allApps = [];
-        let currentCategory = 'all';
-
-        async function fetchAppLibrary() {
-            try {
-                const response = await fetch('apps.json');
-                const data = await response.json();
-                allApps = data.apps || [];
-                
-                document.getElementById('stat-apps').innerText = allApps.length;
-                renderGrid(allApps);
-            } catch (err) {
-                console.error("Pipeline engine execution error:", err);
-                document.getElementById('app-grid').innerHTML = `
-                    <div style="border: 1px solid rgba(244,63,94,0.15); background: rgba(244,63,94,0.02); border-radius: 1rem; padding: 1.15rem; text-align: center;">
-                        <p style="color: #f43f5e; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Failed to load apps.json data source.</p>
-                    </div>
-                `;
-            }
-        }
+        let allApps = [
+            { name: "Violet Store", version: "1.0.0", category: "tweaks", description: "Official Violet sideloading store client.", icon: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&h=150&fit=crop", ipa_url: "#" },
+            { name: "Delta Emulator", version: "1.6", category: "emulators", description: "Multi-system game emulator for iOS.", icon: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=150&h=150&fit=crop", ipa_url: "#" }
+        ];
 
         function renderGrid(apps) {
             const grid = document.getElementById('app-grid');
-            grid.innerHTML = ''; 
-
-            if(!apps || apps.length === 0) {
-                grid.innerHTML = '<p style="text-align:center; color:#64748b; font-size:0.75rem; margin:1.5rem 0;">No matching apps found.</p>';
-                return;
-            }
-
-            apps.forEach((app) => {
-                const name = app.name || "Unknown App";
-                const version = app.version || "1.0";
-                const icon = app.icon || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&h=150&fit=crop";
-                const description = app.description || "No description provided.";
-                const ipaUrl = app.ipa_url || "#";
-
+            grid.innerHTML = '';
+            apps.forEach(app => {
                 const card = document.createElement('div');
                 card.className = "glass-card";
                 card.innerHTML = `
                     <div class="app-info">
-                        <img src="${icon}" class="app-icon" alt="${name}">
+                        <img src="${app.icon}" class="app-icon" alt="${app.name}">
                         <div>
-                            <h3 class="app-name">${name}</h3>
-                            <span class="version-tag">v${version}</span>
-                            <p class="app-desc">${description}</p>
+                            <h3 class="app-name">${app.name}</h3>
+                            <span class="version-tag">v${app.version}</span>
+                            <p class="app-desc">${app.description}</p>
                         </div>
                     </div>
                     <div class="action-group">
-                        <a href="${ipaUrl}" download class="ipa-btn">IPA</a>
-                        <a href="itms-services://?action=download-manifest&url=${ipaUrl}" class="get-btn">Get</a>
+                        <a href="${app.ipa_url}" download class="ipa-btn">IPA</a>
+                        <a href="itms-services://?action=download-manifest&url=${app.ipa_url}" class="get-btn">Get</a>
                     </div>
                 `;
                 grid.appendChild(card);
             });
         }
 
-        function filterApps() {
-            const query = document.getElementById('search-bar').value.toLowerCase();
-            const filtered = allApps.filter(app => {
-                const name = (app.name || "").toLowerCase();
-                const desc = (app.description || "").toLowerCase();
-                const category = (app.category || "").toLowerCase();
-                
-                const matchesCategory = currentCategory === 'all' || category === currentCategory;
-                const matchesSearch = name.includes(query) || desc.includes(query);
-
-                return matchesCategory && matchesSearch;
-            });
-            renderGrid(filtered);
+        function handleFile(input) {
+            if(input.files && input.files[0]) {
+                document.getElementById('file-name').innerText = input.files[0].name;
+            }
         }
 
-        function selectCategory(category, el) {
-            currentCategory = category;
-            document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-            el.classList.add('active');
-            filterApps();
+        function startSigning() {
+            const wrap = document.getElementById('progress-wrap');
+            const fill = document.getElementById('progress-fill');
+            wrap.style.display = 'block';
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    alert("Signing completed! Package ready for deployment.");
+                } else {
+                    width += 10;
+                    fill.style.width = width + '%';
+                }
+            }, 200);
         }
 
-        function copyRepoUrl() {
-            const repoUrl = window.location.origin + '/app-repo.json';
-            navigator.clipboard.writeText(repoUrl).then(() => {
-                alert('Repository URL copied to clipboard!\n' + repoUrl);
-            });
-        }
-
-        fetchAppLibrary();
+        renderGrid(allApps);
     </script>
 </body>
 </html>
