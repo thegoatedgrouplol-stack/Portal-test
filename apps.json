@@ -1,11 +1,13 @@
 {
   "apps": [
     {
-      "name": "Sample App",
-      "version": "1.0",
-      "icon": "https://unsplash.com",
-      "ipa_url": "https://github.io",
-      "description": "A clean sideloadable app example."
+      "name": "Example App",
+      "version": "1.0.0",
+      "bundle_id": "com.example.app",
+      "icon": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&h=150&fit=crop",
+      "category": "apps",
+      "description": "An example application package for testing.",
+      "ipa_url": "https://example.com/app.ipa"
     }
   ]
 }
