@@ -4,25 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Scarlet Web</title>
-    <!-- Tailwind CSS Engine -->
-    <script src="https://tailwindcss.com"></script>
+    <!-- Compiled CSS Delivery Sheet to bypass script restrictions -->
+    <link href="https://jsdelivr.net" rel="stylesheet">
     <style>
         @import url('https://googleapis.com');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: linear-gradient(180deg, #0e0204 0%, #070002 50%, #000000 100%);
+        }
+        .scarlet-glow {
+            box-shadow: 0 0 15px rgba(255, 26, 64, 0.6);
+        }
+        .btn-glow {
+            box-shadow: 0 4px 14px rgba(255, 26, 64, 0.3);
+        }
+        .glass-card {
+            background-color: rgba(20, 6, 9, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 26, 64, 0.15);
+        }
     </style>
 </head>
-<body class="bg-gradient-to-b from-[#0e0204] via-[#070002] to-[#000000] text-gray-100 min-h-screen selection:bg-[#ff1a40]/30 selection:text-white pb-12">
+<body class="text-gray-100 min-h-screen pb-12">
 
     <!-- Scarlet Glowing Header -->
-    <header class="sticky top-0 z-50 backdrop-blur-xl bg-[#0e0204]/70 border-b border-[#ff1a40]/10 px-6 py-4 flex justify-between items-center">
-        <div class="flex items-center gap-2">
+    <header class="sticky top-0 z-50 bg-[#0e0204] border-b border-[#ff1a40]/20 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
             
-            <span class="w-3 h-3 rounded-full bg-[#ff1a40] shadow-[0_0_12px_#ff1a40]"></span>
+            <span class="w-3 h-3 rounded-full bg-[#ff1a40] scarlet-glow"></span>
             <h1 class="text-xl font-extrabold uppercase tracking-wider text-white">Scarlet<span class="text-[#ff1a40]">.</span></h1>
         </div>
-        <div class="flex items-center gap-2 bg-[#ff1a40]/10 border border-[#ff1a40]/20 px-3 py-1 rounded-full">
-            <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span>
-            <span class="text-[11px] font-bold text-emerald-400 uppercase tracking-wider">Signed</span>
+        <div class="flex items-center space-x-2 bg-[#ff1a40]/10 border border-[#ff1a40]/30 px-3 py-1 rounded-full">
+            <span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>
+            <span class="text-[11px] font-bold text-green-400 uppercase tracking-wider">Signed</span>
         </div>
     </header>
 
@@ -31,14 +46,14 @@
         
         <!-- Hero Branding Accent -->
         <div class="mb-8 text-center sm:text-left">
-            <h2 class="text-3xl font-extrabold text-white tracking-tight leading-none mb-1">Native Sideloading</h2>
+            <h2 class="text-3xl font-extrabold text-white tracking-tight mb-1">Native Sideloading</h2>
             <p class="text-xs text-gray-400 tracking-wide font-medium">Select an application below to begin installation.</p>
         </div>
 
         <!-- Scarlet App Library Grid -->
-        <div id="app-grid" class="space-y-3.5">
+        <div id="app-grid" class="space-y-4">
             <!-- Loading Placeholder State -->
-            <div class="bg-[#130508]/40 border border-[#ff1a40]/5 rounded-2xl p-5 flex items-center justify-center">
+            <div class="glass-card rounded-2xl p-5 flex items-center justify-center">
                 <div class="w-5 h-5 border-2 border-t-transparent border-[#ff1a40] rounded-full animate-spin"></div>
             </div>
         </div>
@@ -51,30 +66,29 @@
                 const response = await fetch('apps.json');
                 const data = await response.json();
                 const grid = document.getElementById('app-grid');
-                grid.innerHTML = ''; // Clear placeholder animation
+                grid.innerHTML = ''; // Clear loading spinner
 
                 data.apps.forEach(app => {
                     const card = document.createElement('div');
-                    card.className = "bg-[#140609]/60 backdrop-blur-md border border-[#ff1a40]/10 rounded-2xl p-4 flex items-center justify-between hover:border-[#ff1a40]/20 transition-all duration-300 group";
+                    card.className = "glass-card rounded-2xl p-4 flex items-center justify-between hover:border-[#ff1a40]/40 transition-all duration-300";
                     card.innerHTML = `
-                        <div class="flex items-center gap-4">
+                        <div class="flex items-center space-x-4">
                             <!-- App Icon Frame -->
-                            <div class="relative">
-                                <img src="${app.icon}" class="w-14 h-14 rounded-[22%] object-cover shadow-lg border border-white/5 group-hover:scale-[1.02] transition duration-300" alt="${app.name}">
-                                <div class="absolute inset-0 rounded-[22%] ring-1 ring-inset ring-white/10"></div>
+                            <div class="relative flex-shrink-0">
+                                <img src="${app.icon}" class="w-14 h-14 rounded-2xl object-cover border border-white/10" alt="${app.name}">
                             </div>
                             <!-- App Details -->
                             <div>
-                                <h3 class="font-bold text-white text-[15px] tracking-tight leading-snug group-hover:text-[#ff1a40] transition duration-200">${app.name}</h3>
-                                <div class="flex items-center gap-1.5 mt-0.5">
-                                    <span class="text-[10px] font-bold text-[#ff1a40] bg-[#ff1a40]/10 px-1.5 py-0.5 rounded border border-[#ff1a40]/10">v${app.version}</span>
+                                <h3 class="font-bold text-white text-[15px] tracking-tight leading-snug">${app.name}</h3>
+                                <div class="flex items-center mt-0.5">
+                                    <span class="text-[10px] font-bold text-[#ff1a40] bg-[#ff1a40]/10 px-1.5 py-0.5 rounded border border-[#ff1a40]/20">v${app.version}</span>
                                 </div>
-                                <p class="text-xs text-gray-400 line-clamp-1 mt-1 font-medium max-w-[180px] sm:max-w-[260px]">${app.description}</p>
+                                <p class="text-xs text-gray-400 mt-1 font-medium max-w-[180px] sm:max-w-[260px] truncate">${app.description}</p>
                             </div>
                         </div>
                         <!-- Scarlet Red Action Button -->
                         <a href="itms-services://?action=download-manifest&url=${app.ipa_url}" 
-                           class="bg-[#ff1a40] hover:bg-[#e01235] text-white font-bold text-xs uppercase tracking-widest px-5 py-2.5 rounded-full shadow-[0_4px_16px_rgba(255,26,64,0.25)] hover:shadow-[0_4px_20px_rgba(255,26,64,0.4)] transition-all active:scale-95 duration-200">
+                           class="bg-[#ff1a40] text-white font-bold text-xs uppercase tracking-widest px-5 py-2.5 rounded-full btn-glow transform active:scale-95 transition duration-150 flex-shrink-0">
                             Get
                         </a>
                     `;
