@@ -24,7 +24,7 @@
             position: relative;
         }
 
-        /* 1-to-1 Scarlet Authentic Cosmic Ambient Blur Layer */
+        /* Ambient Glow Layer */
         body::before {
             content: '';
             position: fixed;
@@ -33,7 +33,7 @@
             transform: translateX(-50%);
             width: 120vw;
             height: 65vh;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.16) 0%, rgba(244, 63, 94, 0.04) 40%, rgba(20, 6, 38, 0) 70%);
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.18) 0%, rgba(244, 63, 94, 0.05) 40%, rgba(20, 6, 38, 0) 70%);
             z-index: 0;
             pointer-events: none;
             animation: ambientGlow 8s ease-in-out infinite alternate;
@@ -43,41 +43,26 @@
             0% { opacity: 0.7; transform: translateX(-50%) scale(0.95); }
             100% { opacity: 1; transform: translateX(-50%) scale(1.05); }
         }
-        
-        /* Premium Custom Scrollbar Layout */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #000000;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(168, 85, 247, 0.2);
-            border-radius: 9999px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(168, 85, 247, 0.4);
-        }
 
-        /* Fixed Navigation Header Grid */
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #000000; }
+        ::-webkit-scrollbar-thumb { background: rgba(168, 85, 247, 0.2); border-radius: 9999px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(168, 85, 247, 0.4); }
+
+        /* Navigation Header */
         header {
             position: sticky;
             top: 0;
             z-index: 100;
-            background-color: rgba(9, 2, 18, 0.75);
+            background-color: rgba(9, 2, 18, 0.85);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border-bottom: 1px solid rgba(168, 85, 247, 0.12);
+            border-bottom: 1px solid rgba(168, 85, 247, 0.15);
             padding: 0.9rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            animation: headerReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-        }
-
-        @keyframes headerReveal {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .brand-container {
@@ -113,14 +98,14 @@
             display: flex;
             align-items: center;
             gap: 0.35rem;
-            background-color: rgba(52, 211, 153, 0.05);
-            border: 1px solid rgba(52, 211, 153, 0.2);
-            padding: 0.25rem 0.75rem;
+            background-color: rgba(52, 211, 153, 0.08);
+            border: 1px solid rgba(52, 211, 153, 0.25);
+            padding: 0.3rem 0.85rem;
             border-radius: 9999px;
         }
         .status-dot {
-            width: 0.35rem;
-            height: 0.35rem;
+            width: 0.4rem;
+            height: 0.4rem;
             background-color: #34d399;
             border-radius: 9999px;
             position: relative;
@@ -140,101 +125,127 @@
         }
 
         .status-text {
-            font-size: 9px;
+            font-size: 9.5px;
             font-weight: 800;
             color: #34d399;
             text-transform: uppercase;
             letter-spacing: 0.06em;
         }
 
-        /* Central Responsive Content Platform Layout */
+        /* Main Container */
         main {
             position: relative;
             z-index: 10;
             max-width: 480px;
             margin: 0 auto;
-            padding: 2rem 1.15rem;
+            padding: 1.75rem 1.15rem;
         }
 
         .hero-section {
             text-align: center;
-            margin-bottom: 2rem;
-            animation: viewReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+            margin-bottom: 1.75rem;
         }
 
         .hero-title {
-            font-size: 2.15rem;
+            font-size: 2.2rem;
             font-weight: 800;
             color: #ffffff;
             letter-spacing: -0.02em;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.35rem;
             background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .hero-subtitle {
-            font-size: 0.8rem;
+            font-size: 0.825rem;
             color: #94a3b8;
             font-weight: 500;
-            line-height: 1.4;
+            line-height: 1.45;
         }
 
-        /* UseScarlet Style Multi-Option Feature Slider */
+        /* Quick Action Repo Import Card */
+        .repo-card {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.12) 0%, rgba(13, 4, 26, 0.4) 100%);
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            border-radius: 1.25rem;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .repo-info { flex: 1; }
+        .repo-title { font-size: 13px; font-weight: 800; color: #ffffff; text-transform: uppercase; letter-spacing: 0.04em; }
+        .repo-sub { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+        .repo-btn {
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.35);
+            color: #c084fc;
+            padding: 0.45rem 0.95rem;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .repo-btn:hover {
+            background: rgba(168, 85, 247, 0.3);
+            color: #ffffff;
+        }
+
+        /* Showcase Carousel */
         .showcase-carousel {
             display: flex;
             gap: 0.75rem;
             overflow-x: auto;
-            padding-bottom: 1.25rem;
+            padding-bottom: 1rem;
             margin-bottom: 1.5rem;
             scrollbar-width: none;
-            animation: viewReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
         }
         .showcase-carousel::-webkit-scrollbar { display: none; }
 
         .carousel-card {
-            flex: 0 0 75%;
-            background: linear-gradient(145deg, rgba(28, 11, 52, 0.4) 0%, rgba(13, 4, 26, 0.2) 100%);
-            border: 1px solid rgba(168, 85, 247, 0.15);
+            flex: 0 0 78%;
+            background: linear-gradient(145deg, rgba(28, 11, 52, 0.45) 0%, rgba(13, 4, 26, 0.25) 100%);
+            border: 1px solid rgba(168, 85, 247, 0.18);
             border-radius: 1.25rem;
             padding: 1.1rem;
-            position: relative;
-            overflow: hidden;
             transition: border-color 0.3s ease;
         }
         .carousel-card:hover { border-color: rgba(168, 85, 247, 0.35); }
-        .carousel-title { font-size: 13px; font-weight: 800; text-transform: uppercase; color: #a855f7; letter-spacing: 0.05em; }
+        .carousel-title { font-size: 12px; font-weight: 800; text-transform: uppercase; color: #a855f7; letter-spacing: 0.05em; }
         .carousel-body { font-size: 14px; font-weight: 700; color: #ffffff; margin-top: 0.25rem; }
         .carousel-desc { font-size: 11px; color: #94a3b8; margin-top: 0.2rem; font-weight: 500; }
 
-        /* Metrics Infrastructure Block */
+        /* Stats Row */
         .stats-row {
             display: grid;
             grid-template-cols: repeat(3, 1fr);
             gap: 0.65rem;
-            margin-bottom: 1.75rem;
-            animation: viewReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+            margin-bottom: 1.5rem;
         }
         .stat-card {
             background: linear-gradient(135deg, rgba(22, 8, 44, 0.35) 0%, rgba(11, 3, 24, 0.2) 100%);
-            border: 1px solid rgba(168, 85, 247, 0.08);
+            border: 1px solid rgba(168, 85, 247, 0.1);
             border-radius: 0.95rem;
-            padding: 0.65rem;
+            padding: 0.75rem 0.5rem;
             text-align: center;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.3s ease;
         }
         .stat-card:hover { border-color: rgba(168, 85, 247, 0.25); transform: translateY(-1px); }
-        .stat-val { font-size: 1.1rem; font-weight: 800; color: #ffffff; }
+        .stat-val { font-size: 1.15rem; font-weight: 800; color: #ffffff; }
         .stat-lbl { font-size: 8px; text-transform: uppercase; letter-spacing: 0.06em; color: #a855f7; font-weight: 700; margin-top: 0.2rem; }
 
-        /* Integrated UI Filter Module */
+        /* Category Filter Chips & Search */
         .search-container {
-            margin-bottom: 1.5rem;
-            animation: viewReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+            margin-bottom: 1.25rem;
         }
         .search-input {
             width: 100%;
-            background-color: rgba(16, 5, 29, 0.5);
-            border: 1px solid rgba(168, 85, 247, 0.14);
+            background-color: rgba(16, 5, 29, 0.55);
+            border: 1px solid rgba(168, 85, 247, 0.16);
             padding: 0.85rem 1.25rem;
             border-radius: 1.1rem;
             color: #ffffff;
@@ -243,16 +254,42 @@
             outline: none;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.3s ease;
         }
         .search-input:focus {
             border-color: rgba(168, 85, 247, 0.5);
-            background-color: rgba(23, 7, 43, 0.65);
+            background-color: rgba(23, 7, 43, 0.7);
             box-shadow: 0 0 18px rgba(168, 85, 247, 0.2);
-            transform: scale(1.005);
         }
 
-        /* Glassmorphic Active Library Grid Wall */
+        .filter-bar {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.25rem;
+            scrollbar-width: none;
+        }
+        .filter-bar::-webkit-scrollbar { display: none; }
+        .chip {
+            background: rgba(16, 5, 29, 0.4);
+            border: 1px solid rgba(168, 85, 247, 0.12);
+            color: #94a3b8;
+            padding: 0.4rem 0.95rem;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+        .chip.active, .chip:hover {
+            background: rgba(168, 85, 247, 0.2);
+            border-color: rgba(168, 85, 247, 0.4);
+            color: #ffffff;
+        }
+
+        /* App Grid */
         .app-grid {
             display: flex;
             flex-direction: column;
@@ -260,30 +297,23 @@
         }
 
         .glass-card {
-            background-color: rgba(16, 5, 28, 0.45);
+            background-color: rgba(16, 5, 28, 0.5);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(168, 85, 247, 0.12);
+            border: 1px solid rgba(168, 85, 247, 0.14);
             border-radius: 1.25rem;
             padding: 0.85rem 1.1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            opacity: 0;
-            transform: translateY(12px);
-            animation: cardEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        
-        @keyframes cardEntrance {
-            to { opacity: 1; transform: translateY(0); }
+            transition: all 0.3s ease;
         }
 
         .glass-card:hover {
             border-color: rgba(168, 85, 247, 0.35);
             transform: translateY(-2px);
-            background-color: rgba(24, 8, 43, 0.55);
-            box-shadow: 0 8px 24px rgba(168, 85, 247, 0.08);
+            background-color: rgba(24, 8, 43, 0.65);
+            box-shadow: 0 8px 24px rgba(168, 85, 247, 0.1);
         }
         
         .app-info {
@@ -296,10 +326,8 @@
             height: 3.25rem;
             border-radius: 0.95rem;
             object-fit: cover;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .glass-card:hover .app-icon { transform: scale(1.02) rotate(0.5deg); }
         
         .app-name {
             font-size: 14.5px;
@@ -312,8 +340,8 @@
             font-size: 9px;
             font-weight: 700;
             color: #c084fc;
-            background-color: rgba(168, 85, 247, 0.07);
-            border: 1px solid rgba(168, 85, 247, 0.18);
+            background-color: rgba(168, 85, 247, 0.08);
+            border: 1px solid rgba(168, 85, 247, 0.2);
             padding: 0.1rem 0.4rem;
             border-radius: 4px;
             margin-top: 0.2rem;
@@ -323,50 +351,55 @@
             color: #94a3b8;
             margin-top: 0.3rem;
             font-weight: 500;
-            max-width: 190px;
+            max-width: 170px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
-        /* Ultra-Advanced Dynamic Gradient GUI Button Track */
+        .action-group {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .ipa-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 0.5rem 0.65rem;
+            border-radius: 0.6rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .ipa-btn:hover { background: rgba(255, 255, 255, 0.12); color: #ffffff; }
+
         .get-btn {
-            background: linear-gradient(135deg, #a855f7 0%, #f43f5e 50%, #a855f7 100%);
-            background-size: 200% auto;
+            background: linear-gradient(135deg, #a855f7 0%, #f43f5e 100%);
             color: #ffffff;
             font-weight: 800;
             font-size: 0.725rem;
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            padding: 0.55rem 1.45rem;
+            padding: 0.55rem 1.25rem;
             border-radius: 9999px;
             text-decoration: none;
-            box-shadow: 0 4px 14px rgba(168, 85, 247, 0.35), 0 4px 20px rgba(244, 63, 94, 0.2);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            flex-shrink: 0;
-            animation: gradientShift 4s ease infinite;
+            box-shadow: 0 4px 14px rgba(168, 85, 247, 0.35);
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
         .get-btn:hover {
             transform: translateY(-1px) scale(1.03);
-            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.5), 0 6px 24px rgba(244, 63, 94, 0.35);
-        }
-        .get-btn:active {
-            transform: scale(0.96);
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.5);
         }
 
-        /* 1-to-1 Scarlet Advanced Walkthrough Accordion */
+        /* Help Walkthrough */
         .help-section {
             margin-top: 3.5rem;
-            border-top: 1px solid rgba(168, 85, 247, 0.08);
+            border-top: 1px solid rgba(168, 85, 247, 0.1);
             padding-top: 1.75rem;
-            animation: viewReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
         }
         .help-heading {
             font-size: 0.875rem;
@@ -377,8 +410,8 @@
             letter-spacing: 0.05em;
         }
         .guide-box {
-            background-color: rgba(14, 5, 26, 0.25);
-            border: 1px solid rgba(168, 85, 247, 0.05);
+            background-color: rgba(14, 5, 26, 0.3);
+            border: 1px solid rgba(168, 85, 247, 0.08);
             border-radius: 1rem;
             padding: 1.15rem;
         }
@@ -390,11 +423,6 @@
         }
         .guide-step:last-child { margin-bottom: 0; }
         .guide-accent { color: #c084fc; font-weight: 600; }
-
-        @keyframes viewReveal {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
 
         .spinner {
             width: 1.25rem;
@@ -410,7 +438,7 @@
 </head>
 <body>
 
-    <!-- Sticky Navigation Bar Header -->
+    <!-- Header Bar -->
     <header>
         <div class="brand-container">
             <span class="violet-dot"></span>
@@ -422,16 +450,24 @@
         </div>
     </header>
 
-    <!-- Content Workspace -->
+    <!-- Main Workspace -->
     <main>
         
-        <!-- Hero Introduction Header Section -->
         <section class="hero-section">
             <h2 class="hero-title">Cosmic Sideload</h2>
             <p class="hero-subtitle">Experience a pure 1-to-1 advanced distribution interface layer. Fully optimized for instant deployments.</p>
         </section>
 
-        <!-- UseScarlet Replica Highlight Showcase Carousel -->
+        <!-- Repo Copy Banner -->
+        <div class="repo-card">
+            <div class="repo-info">
+                <div class="repo-title">Scarlet Repository</div>
+                <div class="repo-sub">Import directly into sideloading apps</div>
+            </div>
+            <button class="repo-btn" onclick="copyRepoUrl()">Copy Link</button>
+        </div>
+
+        <!-- Showcase Carousel -->
         <section class="showcase-carousel">
             <div class="carousel-card">
                 <div class="carousel-title">No Revokes</div>
@@ -445,7 +481,7 @@
             </div>
         </section>
 
-        <!-- Dynamic Registry Metric Grid Row -->
+        <!-- Stats Row -->
         <section class="stats-row">
             <div class="stat-card">
                 <div id="stat-apps" class="stat-val">0</div>
@@ -461,17 +497,25 @@
             </div>
         </section>
 
-        <!-- Interactive Search Engine Console -->
+        <!-- Search Bar -->
         <div class="search-container">
             <input type="text" id="search-bar" class="search-input" placeholder="Search application library..." onkeyup="filterApps()">
         </div>
 
-        <!-- Automated Data Render Mount Point -->
+        <!-- Category Chips -->
+        <div class="filter-bar">
+            <button class="chip active" onclick="selectCategory('all', this)">All Apps</button>
+            <button class="chip" onclick="selectCategory('tweaks', this)">Tweaks</button>
+            <button class="chip" onclick="selectCategory('emulators', this)">Emulators</button>
+            <button class="chip" onclick="selectCategory('games', this)">Games</button>
+        </div>
+
+        <!-- App Grid -->
         <div id="app-grid" class="app-grid">
             <div class="spinner"></div>
         </div>
 
-        <!-- Documentation System Block -->
+        <!-- Walkthrough -->
         <section class="help-section">
             <h3 class="help-heading">Configuration Walkthrough</h3>
             <div class="guide-box">
@@ -482,9 +526,9 @@
         </section>
     </main>
 
-    <!-- JavaScript Application Core Logic Engine -->
     <script>
         let allApps = [];
+        let currentCategory = 'all';
 
         async function fetchAppLibrary() {
             try {
@@ -498,7 +542,7 @@
                 console.error("Pipeline engine execution error:", err);
                 document.getElementById('app-grid').innerHTML = `
                     <div style="border: 1px solid rgba(244,63,94,0.15); background: rgba(244,63,94,0.02); border-radius: 1rem; padding: 1.15rem; text-align: center;">
-                        <p style="color: #f43f5e; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Failed to parse apps.json data source configuration.</p>
+                        <p style="color: #f43f5e; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Failed to load apps.json data source.</p>
                     </div>
                 `;
             }
@@ -509,34 +553,32 @@
             grid.innerHTML = ''; 
 
             if(!apps || apps.length === 0) {
-                grid.innerHTML = '<p style="text-align:center; color:#64748b; font-size:0.75rem; margin:1.5rem 0;">No matching distribution packages tracked.</p>';
+                grid.innerHTML = '<p style="text-align:center; color:#64748b; font-size:0.75rem; margin:1.5rem 0;">No matching apps found.</p>';
                 return;
             }
 
-            apps.forEach((app, index) => {
+            apps.forEach((app) => {
                 const name = app.name || "Unknown App";
                 const version = app.version || "1.0";
                 const icon = app.icon || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&h=150&fit=crop";
-                const description = app.description || "No package description included.";
+                const description = app.description || "No description provided.";
                 const ipaUrl = app.ipa_url || "#";
 
                 const card = document.createElement('div');
                 card.className = "glass-card";
-                card.style.animationDelay = `${index * 50}ms`;
                 card.innerHTML = `
                     <div class="app-info">
-                        <div class="app-icon-wrapper">
-                            <img src="${icon}" class="app-icon" alt="${name}">
-                        </div>
+                        <img src="${icon}" class="app-icon" alt="${name}">
                         <div>
                             <h3 class="app-name">${name}</h3>
                             <span class="version-tag">v${version}</span>
                             <p class="app-desc">${description}</p>
                         </div>
                     </div>
-                    <a href="itms-services://?action=download-manifest&url=${ipaUrl}" class="get-btn">
-                        Get
-                    </a>
+                    <div class="action-group">
+                        <a href="${ipaUrl}" download class="ipa-btn">IPA</a>
+                        <a href="itms-services://?action=download-manifest&url=${ipaUrl}" class="get-btn">Get</a>
+                    </div>
                 `;
                 grid.appendChild(card);
             });
@@ -547,9 +589,28 @@
             const filtered = allApps.filter(app => {
                 const name = (app.name || "").toLowerCase();
                 const desc = (app.description || "").toLowerCase();
-                return name.includes(query) || desc.includes(query);
+                const category = (app.category || "").toLowerCase();
+                
+                const matchesCategory = currentCategory === 'all' || category === currentCategory;
+                const matchesSearch = name.includes(query) || desc.includes(query);
+
+                return matchesCategory && matchesSearch;
             });
             renderGrid(filtered);
+        }
+
+        function selectCategory(category, el) {
+            currentCategory = category;
+            document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+            filterApps();
+        }
+
+        function copyRepoUrl() {
+            const repoUrl = window.location.origin + '/app-repo.json';
+            navigator.clipboard.writeText(repoUrl).then(() => {
+                alert('Repository URL copied to clipboard!\n' + repoUrl);
+            });
         }
 
         fetchAppLibrary();
