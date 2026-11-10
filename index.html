@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Web</title>
+    <!-- Tailwind CSS for a modern dark look matching the original app -->
+    <script src="https://tailwindcss.com"></script>
+</head>
+<body class="bg-[#0d1117] text-gray-200 font-sans min-h-screen">
+
+    <!-- Navbar Header -->
+    <header class="border-b border-gray-800 bg-[#161b22] p-4 flex justify-between items-center">
+        <h1 class="text-xl font-bold tracking-wide text-white">Portal Web</h1>
+        <span class="bg-green-500/20 text-green-400 text-xs px-2 py-1 rounded-full border border-green-500/30 font-medium">Certificates Active</span>
+    </header>
+
+    <!-- Main Application List Container -->
+    <main class="max-w-4xl mx-auto p-6">
+        <h2 class="text-lg font-semibold text-gray-400 mb-4">Available Applications</h2>
+        
+        <!-- App Grid (Populates automatically from apps.json) -->
+        <div id="app-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="text-gray-500 text-sm animate-pulse">Loading app library...</div>
+        </div>
+    </main>
+
+    <!-- JavaScript Engine to Fetch and Render App Cards -->
+    <script>
+        async function loadPortalApps() {
+            try {
+                const response = await fetch('apps.json');
+                const data = await response.json();
+                const grid = document.getElementById('app-grid');
+                grid.innerHTML = ''; // Clear out the loading text
+
+                data.apps.forEach(app => {
+                    const card = document.createElement('div');
+                    card.className = "bg-[#161b22] border border-gray-800 rounded-xl p-4 flex items-center justify-between hover:border-gray-700 transition duration-200";
+                    card.innerHTML = `
+                        <div class="flex items-center gap-4">
+                            <img src="${app.icon}" class="w-14 h-14 rounded-2xl object-cover bg-gray-800" alt="${app.name}">
+                            <div>
+                                <h3 class="font-bold text-white text-base">${app.name}</h3>
+                                <p class="text-xs text-gray-400">v${app.version}</p>
+                                <p class="text-xs text-gray-500 line-clamp-1 mt-0.5">${app.description}</p>
+                            </div>
+                        </div>
+                        <a href="itms-services://?action=download-manifest&url=${app.ipa_url}" 
+                           class="bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs px-4 py-2 rounded-lg transition-all active:scale-95 shadow-md">
+                            GET
+                        </a>
+                    `;
+                    grid.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Error rendering dashboard:', error);
+                document.getElementById('app-grid').innerHTML = '<p class="text-red-400 text-sm">Error connecting to app database asset.</p>';
+            }
+        }
+        loadPortalApps();
+    </script>
+</body>
+</html>
